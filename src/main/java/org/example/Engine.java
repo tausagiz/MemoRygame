@@ -2,12 +2,14 @@ package org.example;
 
 import java.util.Arrays;
 import java.util.Random;
+import java.util.concurrent.TimeUnit;
 
 public class Engine {
     final Random randomGenerator = new Random();
     private boolean gameNotFinished;
     private char difficultyLevel;
     private int numberOfWordPairsToFind;
+    private int chances;
     private int chancesLeft;
     private String[] solution;
     private String[] validCoordinates;
@@ -23,6 +25,8 @@ public class Engine {
     private int pairsFound;
     private boolean areLastFieldsToHide;
     private boolean gameWon;
+    private long startTime;
+    private long endTime;
 
     public void resetGame() {
         this.difficultyLevel = 'n';
@@ -34,6 +38,7 @@ public class Engine {
         int wordsLeft = this.numberOfWordPairsToFind - this.pairsFound;
         if (wordsLeft == 0) {
             this.gameWon = true;
+            this.endTime = System.nanoTime();
         }
         if (difficultyLevel != 'n' && (chancesLeft == 0 || gameWon)) {
             this.gameNotFinished = false;
@@ -53,16 +58,16 @@ public class Engine {
 
     public void setParameters(String[] allWords) {
         // setting base parameters
-        int chances;
+        this.startTime = System.nanoTime();
         this.pairsFound = 0;
         this.gameWon = false;
         this.firstFieldIndex = 0;
         this.secondFieldIndex = 0;
         if (this.difficultyLevel == 'e') {
-            chances = 10;
+            this.chances = 10;
             this.numberOfWordPairsToFind = 4;
         } else {
-            chances = 15;
+            this.chances = 15;
             this.numberOfWordPairsToFind = 8;
         }
         this.chancesLeft = chances;
@@ -212,8 +217,17 @@ public class Engine {
         validCoordinates = Arrays.copyOf(newValidCoordinates, newValidCoordinates.length);
     }
 
+    public int getGuessingTries() {
+        return chances - getChancesLeft();
+    }
+
     public boolean isGameWon() {
         return this.gameWon;
+    }
+
+    public long getGuessingTimeInSeconds() {
+        long guessingTime = this.endTime - this.startTime;
+        return TimeUnit.SECONDS.convert(guessingTime, TimeUnit.NANOSECONDS);
     }
 
 }

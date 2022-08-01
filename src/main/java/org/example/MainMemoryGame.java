@@ -26,8 +26,7 @@ public class MainMemoryGame {
                 coordinates = INPUT.provideCoordinates(ENGINE.getValidCoordinates());
                 ENGINE.uncoverSecondField(coordinates);
             }
-
-            SCREEN.printGameOver(ENGINE.isGameWon());
+            SCREEN.printGameOver(ENGINE.isGameWon(), ENGINE.getGuessingTries(), ENGINE.getGuessingTimeInSeconds());
 
             if (INPUT.doPlayerWantsToTryAgain()) {
                 ENGINE.resetGame();

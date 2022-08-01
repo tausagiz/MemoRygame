@@ -15,10 +15,12 @@ public class Screen {
         //TODO maybe add rules of the game
     }
 
-    public void printGameOver(boolean isGameWon) {
+    public void printGameOver(boolean isGameWon, int guessingTries, long guessingTime) {
         clear();
         if (isGameWon) {
             System.out.println("You won!");
+            System.out.println("You solved the memory game after " + guessingTries + " chances.");
+            System.out.println("It took you " + guessingTime + " seconds.");
         } else {
             System.out.println("You loose!");
         }
