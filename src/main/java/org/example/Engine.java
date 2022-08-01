@@ -7,7 +7,7 @@ import java.util.concurrent.TimeUnit;
 public class Engine {
     final Random randomGenerator = new Random();
     private boolean gameNotFinished;
-    private char difficultyLevel;
+    private String difficultyLevel;
     private int numberOfWordPairsToFind;
     private int chances;
     private int chancesLeft;
@@ -33,7 +33,7 @@ public class Engine {
     }
 
     public void resetGame() {
-        this.difficultyLevel = 'n';
+        this.difficultyLevel = "not set";
         this.gameNotFinished = true;
         this.gameWon = false;
     }
@@ -44,7 +44,7 @@ public class Engine {
             this.gameWon = true;
             this.endTime = System.nanoTime();
         }
-        if (difficultyLevel != 'n' && (chancesLeft == 0 || gameWon)) {
+        if (!difficultyLevel.equals("not set") && (chancesLeft == 0 || gameWon)) {
             this.gameNotFinished = false;
         }
         return this.gameNotFinished;
@@ -52,11 +52,9 @@ public class Engine {
 
     public void setDifficultyLevel(int option) {
         if (option == 1) {
-            this.difficultyLevel = 'e';
-        } else if (option == 2) {
-            this.difficultyLevel = 'h';
+            this.difficultyLevel = "easy";
         } else {
-            System.out.println("Incorrect value.");
+            this.difficultyLevel = "hard";
         }
     }
 
@@ -67,7 +65,7 @@ public class Engine {
         this.gameWon = false;
         this.firstFieldIndex = 0;
         this.secondFieldIndex = 0;
-        if (this.difficultyLevel == 'e') {
+        if (this.difficultyLevel.equals("easy")) {
             this.chances = 10;
             this.numberOfWordPairsToFind = 4;
         } else {
@@ -144,14 +142,7 @@ public class Engine {
     }
 
     public String getDifficultyName() {
-        if (this.difficultyLevel == 'e') {
-            return "easy";
-        }
-        if (this.difficultyLevel == 'h') {
-            return "hard";
-        } else {
-            return "not set";
-        }
+        return this.difficultyLevel;
     }
 
     public int getChancesLeft() {
