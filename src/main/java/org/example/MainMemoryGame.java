@@ -24,6 +24,11 @@ public class MainMemoryGame {
 
             SCREEN.printGameOver(ENGINE.isGameWon(), ENGINE.getGuessingTries(), ENGINE.getGuessingTimeInSeconds());
 
+            if (ENGINE.isGameWon()){
+                String name = INPUT.username();
+                INPUT.updateScore(name, ENGINE.getGuessingTimeInSeconds(), ENGINE.getGuessingTries());
+            }
+
             if (INPUT.doPlayerWantsToTryAgain()) {
                 ENGINE.resetGame();
             }
