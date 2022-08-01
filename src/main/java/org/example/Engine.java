@@ -125,7 +125,7 @@ public class Engine {
 
         // generating and covering array to uncover
         this.visibleFields = new String[this.solution.length];
-        Arrays.fill(this.visibleFields, "X");
+        Arrays.fill(this.visibleFields, "      X       |");
 
         // generating valid coordinates options
         this.validCoordinates = new String[doubledWordsToFind.length];
@@ -141,7 +141,7 @@ public class Engine {
         return this.validCoordinates;
     }
 
-    public String getDifficultyName() {
+    public String getDifficultyLevel() {
         return this.difficultyLevel;
     }
 
@@ -165,8 +165,8 @@ public class Engine {
 
     public void uncoverFirstField(String coordinates) {
         if (areLastFieldsToHide) {
-            this.visibleFields[this.firstFieldToHideIndex] = "X";
-            this.visibleFields[this.secondFieldToHideIndex] = "X";
+            this.visibleFields[this.firstFieldToHideIndex] = "      X       |";
+            this.visibleFields[this.secondFieldToHideIndex] = "      X       |";
         }
         uncoverField(coordinates);
         this.firstFieldIndex = this.fieldToCheckIndex;

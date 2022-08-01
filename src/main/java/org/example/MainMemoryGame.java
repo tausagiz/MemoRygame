@@ -15,8 +15,8 @@ public class MainMemoryGame {
 
             while (ENGINE.isGameNotFinished()) {
                 for (int turn = 1; turn <= 2; turn++) {
-                    SCREEN.printGameStatus(ENGINE.getDifficultyName(), ENGINE.getChancesLeft());
-                    SCREEN.drawMatrix(ENGINE.getVisibleFields());
+                    SCREEN.printGameStatus(ENGINE.getDifficultyLevel(), ENGINE.getChancesLeft());
+                    SCREEN.drawMatrix(ENGINE.getDifficultyLevel(), ENGINE.getVisibleFields());
                     coordinates = INPUT.provideCoordinates(ENGINE.getValidCoordinates());
                     ENGINE.flipFields(turn, coordinates);
                 }

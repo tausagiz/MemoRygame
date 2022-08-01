@@ -24,11 +24,17 @@ public class Input {
         }
 
         int wordsArrayIndex = 0;
-
+        int lineLength;
+        int spacesToFill;
+        int longestWordLength = 13; //this works for file from task, will be universal later
         while (fileReader.hasNextLine()) {
-            String line = fileReader.nextLine();
+            StringBuilder line = new StringBuilder(fileReader.nextLine());
+            lineLength = line.length();
+            spacesToFill = longestWordLength - lineLength;
+            line.append(" ".repeat(Math.max(0, spacesToFill + 1)));
+            line.append("|");
             this.allWords = Arrays.copyOf(this.allWords, this.allWords.length + 1);
-            this.allWords[wordsArrayIndex] = line;
+            this.allWords[wordsArrayIndex] = line.toString();
             ++wordsArrayIndex;
         }
 
@@ -64,7 +70,7 @@ public class Input {
         String coordinates = "";
 
         while (!validCoordinatesProvided) {
-            System.out.println("Valid options: " + Arrays.toString(validCoordinatesArray));
+            System.out.println("Valid options " + Arrays.toString(validCoordinatesArray));
             System.out.print("Type coordinates to check and press Enter: ");
             coordinates = keyboardInput.nextLine();
 

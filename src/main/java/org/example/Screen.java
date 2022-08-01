@@ -26,31 +26,45 @@ public class Screen {
         }
     }
 
-    public void printGameStatus(String difficultyName, int chances) {
+    public void printGameStatus(String difficultyLevel, int chances) {
         clear();
-        System.out.println("-----------------");
-        System.out.println("Level: " + difficultyName);
+        drawLine(difficultyLevel);
+        System.out.println("Level: " + difficultyLevel);
         System.out.println("Guess chances: " + chances);
-        System.out.println();
     }
 
-    public void drawMatrix(String[] visibleFields) {
+    public void drawMatrix(String difficultyLevel, String[] visibleFields) {
         int matrixWidth = visibleFields.length / 2;
-        System.out.print(" ");
+        drawLine(difficultyLevel);
+        System.out.print("  |");
         for (int i = 1; i <= matrixWidth; i++) {
-            System.out.print(" " + i);
+            System.out.print("       " + i + "       |");
         }
         System.out.println();
-        System.out.print("A");
+        drawLine(difficultyLevel);
+        System.out.print("A |");
         for (int i = 0; i < matrixWidth; i++) {
             System.out.print(" " + visibleFields[i]);
         }
         System.out.println();
-        System.out.print("B");
+        drawLine(difficultyLevel);
+        System.out.print("B |");
         for (int i = matrixWidth; i < visibleFields.length; i++) {
             System.out.print(" " + visibleFields[i]);
         }
         System.out.println();
-        System.out.println("-----------------");
+        drawLine(difficultyLevel);
+    }
+
+    private void drawLine(String difficultyLevel) {
+        StringBuilder line = new StringBuilder();
+        int lineLength;
+        if (difficultyLevel.equals("easy")) {
+            lineLength = 67;
+        } else {
+            lineLength = 67 + 64;
+        }
+        line.append("-".repeat(lineLength));
+        System.out.println(line);
     }
 }
