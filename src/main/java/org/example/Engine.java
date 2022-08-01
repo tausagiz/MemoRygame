@@ -28,6 +28,10 @@ public class Engine {
     private long startTime;
     private long endTime;
 
+    public Engine() {
+        resetGame();
+    }
+
     public void resetGame() {
         this.difficultyLevel = 'n';
         this.gameNotFinished = true;
@@ -197,6 +201,14 @@ public class Engine {
             this.firstUncoveredWord = "";
         }
         --this.chancesLeft;
+    }
+
+    public void flipFields(int turn, String coordinates) {
+        if (turn == 1) {
+            uncoverFirstField(coordinates);
+        } else {
+            uncoverSecondField(coordinates);
+        }
     }
 
     public void updateValidCoordinates() {

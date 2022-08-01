@@ -6,7 +6,6 @@ public class MainMemoryGame {
     final static Input INPUT = new Input();
 
     public static void main(String[] args) {
-        ENGINE.resetGame();
         String coordinates;
 
         while (ENGINE.isGameNotFinished()) {
@@ -15,17 +14,14 @@ public class MainMemoryGame {
             ENGINE.setParameters(INPUT.getAllWords());
 
             while (ENGINE.isGameNotFinished()) {
-                // first turn
-                SCREEN.printGameStatus(ENGINE.getDifficultyName(), ENGINE.getChancesLeft());
-                SCREEN.drawMatrix(ENGINE.getVisibleFields());
-                coordinates = INPUT.provideCoordinates(ENGINE.getValidCoordinates());
-                ENGINE.uncoverFirstField(coordinates);
-                // second turn
-                SCREEN.printGameStatus(ENGINE.getDifficultyName(), ENGINE.getChancesLeft());
-                SCREEN.drawMatrix(ENGINE.getVisibleFields());
-                coordinates = INPUT.provideCoordinates(ENGINE.getValidCoordinates());
-                ENGINE.uncoverSecondField(coordinates);
+                for (int turn = 1; turn <= 2; turn++) {
+                    SCREEN.printGameStatus(ENGINE.getDifficultyName(), ENGINE.getChancesLeft());
+                    SCREEN.drawMatrix(ENGINE.getVisibleFields());
+                    coordinates = INPUT.provideCoordinates(ENGINE.getValidCoordinates());
+                    ENGINE.flipFields(turn, coordinates);
+                }
             }
+
             SCREEN.printGameOver(ENGINE.isGameWon(), ENGINE.getGuessingTries(), ENGINE.getGuessingTimeInSeconds());
 
             if (INPUT.doPlayerWantsToTryAgain()) {
