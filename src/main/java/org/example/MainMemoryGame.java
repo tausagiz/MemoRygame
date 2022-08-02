@@ -4,6 +4,7 @@ public class MainMemoryGame {
     final static Screen SCREEN = new Screen();
     final static Engine ENGINE = new Engine();
     final static Input INPUT = new Input();
+    final static Scores SCORES = new Scores();
 
     public static void main(String[] args) {
         String coordinates;
@@ -25,9 +26,11 @@ public class MainMemoryGame {
             SCREEN.printGameOver(ENGINE.isGameWon(), ENGINE.getGuessingTries(), ENGINE.getGuessingTimeInSeconds());
 
             if (ENGINE.isGameWon()){
-                String name = INPUT.username();
-                INPUT.updateScore(name, ENGINE.getGuessingTimeInSeconds(), ENGINE.getGuessingTries());
+                String username = INPUT.username();
+                SCORES.updateScore(username, ENGINE.getGuessingTimeInSeconds(), ENGINE.getGuessingTries());
             }
+
+            SCREEN.drawScores(SCORES.provideScoresTable());
 
             if (INPUT.doPlayerWantsToTryAgain()) {
                 ENGINE.resetGame();

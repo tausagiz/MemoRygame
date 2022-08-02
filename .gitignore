@@ -36,3 +36,7 @@ build/
 
 ### Mac OS ###
 .DS_Store
+
+### Used for testing ###
+TestWordsWin.txt
+TestWordsFail.txt

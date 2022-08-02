@@ -2,11 +2,7 @@ package org.example;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.text.SimpleDateFormat;
 import java.util.Arrays;
-import java.util.Date;
 import java.util.Scanner;
 
 public class Input {
@@ -105,36 +101,5 @@ public class Input {
     public String username() {
         System.out.print("Type your name and press ENTER: ");
         return keyboardInput.nextLine();
-    }
-
-    public void updateScore(String username, long guessingTime, int guessingTries) {
-        Date date = new Date(); // This object contains the current date value
-        SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
-        String formattedDate = formatter.format(date);
-        String lineToWrite = username + " | " + formattedDate + " | " + guessingTime + " | " + guessingTries;
-
-        try {
-            File scores = new File("Scores.txt");
-            if (scores.createNewFile()) {
-                System.out.println("File created: " + scores.getName());
-            } else {
-                System.out.println("File already exists.");
-            }
-        } catch (IOException e) {
-            System.out.println("An error occurred.");
-            e.printStackTrace();
-        }
-
-        try {
-            FileWriter fileWriter = new FileWriter("Scores.txt");
-            fileWriter.write("name | date | guessing_time | guessing_tries");
-            fileWriter.write(System.lineSeparator());
-            fileWriter.write(lineToWrite);
-            fileWriter.close();
-            System.out.println("Successfully wrote to the file.");
-        } catch (IOException e) {
-            System.out.println("An error occurred.");
-            e.printStackTrace();
-        }
     }
 }

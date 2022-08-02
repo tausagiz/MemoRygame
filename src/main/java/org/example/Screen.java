@@ -67,4 +67,13 @@ public class Screen {
         line.append("-".repeat(lineLength));
         System.out.println(line);
     }
+
+    public void drawScores(String[] lines) {
+        System.out.println();
+        System.out.println("Last scores: ");
+        for (String line : lines) {
+            System.out.println(line);
+        }
+        System.out.println();
+    }
 }
