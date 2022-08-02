@@ -5,7 +5,7 @@ import java.util.Random;
 import java.util.concurrent.TimeUnit;
 
 public class Engine {
-    final Random randomGenerator = new Random();
+    private final Random randomGenerator = new Random();
     private boolean gameNotFinished;
     private String difficultyLevel;
     private int numberOfWordPairsToFind;
@@ -75,18 +75,24 @@ public class Engine {
         this.chancesLeft = chances;
 
         // generating random indexes without duplicates
-        int randomIndex;
-        int[] randomIndexes = new int[this.numberOfWordPairsToFind];
-        int randomIndexesIndex = 0;
-        while (randomIndexesIndex < randomIndexes.length) {
-            randomIndex = this.randomGenerator.nextInt(allWords.length);
-            for (int j = 0; j < randomIndexes.length; j++) {
-                if (randomIndexes[j] != randomIndex) {
-                    randomIndexes[randomIndexesIndex] = randomIndex;
-                    break;
+        int randomIndex = 0;
+        int[] randomIndexes = new int[numberOfWordPairsToFind];
+        int resultIndex = 0;
+        while (resultIndex < numberOfWordPairsToFind) {
+            boolean unique = false;
+            while (!unique) {
+                randomIndex = randomGenerator.nextInt(allWords.length);
+//                randomIndex = 5;
+                for (int i = 0; i <= resultIndex; i++) {
+                    if (randomIndexes[0] == randomIndex) {
+                        break;
+                    } else {
+                        unique = true;
+                    }
                 }
             }
-            randomIndexesIndex++;
+            randomIndexes[resultIndex] = randomIndex;
+            resultIndex++;
         }
 
         // picking words to find
