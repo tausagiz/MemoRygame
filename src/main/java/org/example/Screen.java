@@ -10,9 +10,16 @@ public class Screen {
 
     public void printWelcomeMessage() {
         clear();
-        String welcomeMessage = "Welcome to this simple memory game!";
-        System.out.println(welcomeMessage);
-        //TODO maybe add rules of the game
+        System.out.println("  __  __                                  _____                      ");
+        System.out.println(" |  \\/  |                                / ____|                     ");
+        System.out.println(" | \\  / | ___ _ __ ___   ___  _ __ _   _| |  __  __ _ _ __ ___   ___ ");
+        System.out.println(" | |\\/| |/ _ \\ '_ ` _ \\ / _ \\| '__| | | | | |_ |/ _` | '_ ` _ \\ / _ \\");
+        System.out.println(" | |  | |  __/ | | | | | (_) | |  | |_| | |__| | (_| | | | | | |  __/");
+        System.out.println(" |_|  |_|\\___|_| |_| |_|\\___/|_|   \\__, |\\_____|\\__,_|_| |_| |_|\\___|");
+        System.out.println("                                    __/ |           by Mateusz Rusnak");
+        System.out.println("                                   |___/                             ");
+        System.out.println();
+        System.out.println("Welcome to this simple memory game!");
     }
 
     public void printGameOver(boolean isGameWon, int guessingTries, long guessingTime) {
