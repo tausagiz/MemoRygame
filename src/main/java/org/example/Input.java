@@ -13,12 +13,48 @@ public class Input {
         this.allWords = new String[0];
         File wordsFile = new File("Words.txt");
         Scanner fileReader = null;
+        boolean validFile = false;
 
-        while (fileReader == null) {
+        while (!validFile) {
             try {
                 fileReader = new Scanner(wordsFile);
+                int wordsArrayIndex = 0;
+                int lineLength;
+                int spacesToFill;
+                int longestWordLength = 13; //this works for file from task, will be universal later
+                while (fileReader.hasNextLine()) {
+                    StringBuilder line = new StringBuilder(fileReader.nextLine());
+                    lineLength = line.length();
+                    spacesToFill = longestWordLength - lineLength;
+                    line.append(" ".repeat(Math.max(0, spacesToFill + 1)));
+                    line.append("|");
+                    this.allWords = Arrays.copyOf(this.allWords, this.allWords.length + 1);
+                    this.allWords[wordsArrayIndex] = line.toString();
+                    ++wordsArrayIndex;
+                }
+
+                validFile = true;
+
+                if (allWords.length < 8) {
+                    validFile = false;
+                    throw new FileNotFoundException(); //to see if file has enough words
+                } else {
+                    for (String line :
+                            allWords) {
+                        if (line.isEmpty() || line.isBlank()) { //to see if file contains empty lines
+                            validFile = false;
+                            throw new FileNotFoundException();
+                        }
+                    }
+                }
+
             } catch (FileNotFoundException e) {
-                System.out.println("There is no Words.txt file! Provide missing file and try again.");
+                System.out.println("There is problem with Words.txt:");
+                System.out.println("- there is no such file.");
+                System.out.println("- file is empty.");
+                System.out.println("- does not have enough words to play (min. 8 required).");
+                System.out.println("- contains empty lines.");
+                System.out.println("Provide valid file and try again.");
                 doPlayerWantsToTryAgain();
             }
         }
